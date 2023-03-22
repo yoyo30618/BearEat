@@ -125,23 +125,33 @@
 					<p>走過路過千萬不可以錯過</p>
 					<span></span>
 				</div>
+				<table>
 				<?php
-					$sql_Lang="SELECT * FROM `foodtable`";
-					$res_Lang=mysqli_query($db_link,$sql_Lang)or die("sql_Lang查詢失敗");
-					while($row_Lang=mysqli_fetch_array($res_Lang)){
-						echo "<div class='col-md-3 col-sm-6 col-xs-12 wow fadeInDown tema-member'>";
+					$sql_Lang="SELECT * FROM `foodtable` WHERE `Status`=1";
+					$res_Lang1=mysqli_query($db_link,$sql_Lang)or die("sql_Lang查詢失敗");
+					$res_Lang2=mysqli_query($db_link,$sql_Lang)or die("sql_Lang查詢失敗");
+					$i=-1;
+					echo "<tr>";
+					while($row_Lang1=mysqli_fetch_array($res_Lang1)){
+						$row_Lang2=mysqli_fetch_array($res_Lang1);
+						echo "<td>";
+						echo "<div class='tema-member'>";
 							echo "<div class='team-thumbnail'>";
-								echo "<img src='assets/img/food/".$row_Lang['_ID'].".jpg' class='img-responsive'>";
-								echo "<div class='overlay'></div>";
+								echo "<img src='assets/img/food/".$row_Lang1['_ID'].".jpg'   style=' max-width:100%;height:auto;'>";
 							echo "</div>";
 							echo "<div class='info'>";
-								echo "<h2>".$row_Lang['Name']."</h2>";
-								echo "<p>".$row_Lang['Info']."</p>";
-								echo "<p>".$row_Lang['Price']."元</p>";
+								echo "<h2>".$row_Lang2['Name']."</h2>";
+								echo "<p>".$row_Lang2['Info']."</p>";
+								echo "<p>".$row_Lang2['Price']."元</p>";
 							echo "</div>";
 						echo "</div>";
+						echo "</td>";
+						$i=$i+1;
+						if($i%3==2) echo "</tr><tr>";
 					}
+					echo "</tr>";
 				?>
+				</table>
 
 
 
